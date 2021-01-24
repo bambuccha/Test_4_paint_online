@@ -1,0 +1,137 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.action_chains import ActionChains
+try:
+    link = "https://paint-online.ru/auth/login.php"
+    # link = "https://paint-online.ru"
+    browser = webdriver.Chrome()
+    browser.get(link)
+
+    # Тут не получается обойти окно с всплывающей рекламой, поэтому сразу захожу на авторизацию
+    # button1 = browser.find_element_by_xpath("//div[@id='auth_links']/div/a")
+    # button1.click()
+    # time.sleep(2)
+    # button2 = browser.find_element_by_xpath("//div[@cid='dismiss_button']")
+    # button2.click()
+    button3 = browser.find_element_by_xpath("//div[@class='social_button'][4]/a")
+    button3.click()
+    input1 = browser.find_element_by_xpath("//input[@id='passp-field-login']")
+    input1.send_keys("testert3stoviy@yandex.ru")
+    button4 = browser.find_element_by_xpath("//button[@class='Button2 Button2_size_l Button2_view_action Button2_width_max Button2_type_submit']")
+    button4.click()
+    time.sleep(2)
+    # Здесь долго пытался использовать разные методы и локаторы, но пароль не вводился, поставил задержку две секунды
+    # и оставил поиск по имени и типу, хотя можно было по id
+    input1 = browser.find_element_by_xpath("//input[@name='passwd' and @type='password']")
+    input1.send_keys("vernImne2007")
+    button5 = browser.find_element_by_xpath("//button[@class='Button2 Button2_size_l Button2_view_action Button2_width_max Button2_type_submit']")
+    button5.click()
+    time.sleep(2)
+    # Пишем HELLO
+    board = browser.find_element_by_xpath("//div[@id='default-board']")
+    webdriver.ActionChains(browser).move_to_element(board).perform()
+    # Буква H
+    webdriver.ActionChains(browser).click_and_hold(board).perform()
+    xOffset = 0
+    yOffset = 50
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 0
+    yOffset = -25
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 0
+    yOffset = -25
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 0
+    yOffset = 50
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Переход на букву Е
+    webdriver.ActionChains(browser).release().perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Буква Е
+    webdriver.ActionChains(browser).click_and_hold().perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = -25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 0
+    yOffset = -25
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = -25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 0
+    yOffset = -25
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Переход на букву L
+    webdriver.ActionChains(browser).release().perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Буква L
+    webdriver.ActionChains(browser).click_and_hold().perform()
+    xOffset = 0
+    yOffset = 50
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Переход на 2 букву L
+    webdriver.ActionChains(browser).release().perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # 2 буква L
+    webdriver.ActionChains(browser).click_and_hold().perform()
+    xOffset = 0
+    yOffset = -50
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Переход на букву O
+    webdriver.ActionChains(browser).release().perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    # Буква O
+    webdriver.ActionChains(browser).click_and_hold().perform()
+    xOffset = 0
+    yOffset = 50
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = 0
+    yOffset = -50
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    xOffset = -25
+    yOffset = 0
+    webdriver.ActionChains(browser).move_by_offset(xOffset, yOffset).perform()
+    webdriver.ActionChains(browser).release().perform()
+    # Публикуем рисунок
+    button6 = browser.find_element_by_xpath('//button[contains(@class,"drawing-board-control-publish-button")]')
+    button6.click()
+    input = browser.find_element_by_xpath("//input[@name='author']")
+    input.send_keys("selenium")
+    button7 = browser.find_element_by_xpath("//input[@id='publish_button']")
+    button7.click()
+    # Смотрим сообщение об успешной публикации
+    result_elt = browser.find_element_by_xpath("//div[@id='sucess_publish_message']/p[1]")
+
+    result = result_elt.text
+
+    # Проверяем, что тексты совпадают
+    assert "Ваша картинка успешно опубликована!" == result
+    print('OK')
+
+finally:
+
+    time.sleep(1)
+    browser.quit()
